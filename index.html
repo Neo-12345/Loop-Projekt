@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sten Sax Påse</title>
+    <script>
+        // 0 = Sten
+        // 1 = Sax
+        // 2 = Påse
+
+        function startanamn() { // Funktion för starta namn process knappen. Använder funktionerna för att simpelt köra olika koder beroende på vilken knapp det är.
+            let input = document.createElement("input"); // Skapar en HTML input ruta. För att man ska kunna skriva in ett namn
+            let button = document.createElement("button"); // Skapar en HTML button. För att man ska kunna submita namnet.
+
+            input.setAttribute("type", "text"); // Sätter värden till input / button. Ett sätt för att sätta värden på input / knapp, och ett simpelt sätt att göra det på.
+            input.setAttribute("id", "namnet");
+
+            button.innerHTML = "Skicka in";
+            button.setAttribute("type", "button");
+            button.setAttribute("id", "knapp")
+            button.setAttribute("onclick", "namn()");
+
+            document.body.appendChild(input); // Skickar in input och button till bodyn på hemsidan.
+            document.body.appendChild(button); // Använder detta för att displaya input och knappen på HTML sidan.
+
+            let knapp = document.getElementById("start"); // En variabel som letar fram ett id (Knappar i detta fallet). För att hitta en sak som har ett ID från html.
+            knapp.parentNode.removeChild(knapp); // Tar bort knappen med hjälp av variablen. För att ta bort knappen och gå vidare till nästa grej.
+
+            let ingetnamn = document.getElementById("ingetnamn");
+            ingetnamn.parentNode.removeChild(ingetnamn);
+        }
+
+        function namn() { // Funktion för skicka in namn knappen.
+            let titel = document.createElement("h2"); // Skapar en secondary header. För att kunna displaya om du vann, förlorade eller lika.
+            titel.id = "alert"; // Ger den ett id. Ger ett ID till headern, för att lätt kunna ändra den.
+            document.body.appendChild(titel); // Skickar in den till HTML bodyn. Använder detta för att lägga in html headern till sidan.
+
+            // Lägger in värdet från input rutan till en text i högra hörnet
+            // för att displaya spelarens namn.
+            document.getElementById("spelare").innerHTML = `<b>Spelare:</b> ${document.querySelector("#namnet").value}`;
+
+            let input = document.getElementById("namnet"); // Hämtar id från input och namn knappen. Använder det för att ta en html id för att enkelt kunna ta bort det.
+            input.parentNode.removeChild(input); // Tar bort dem från hemsidan med hjälp av variablen. För att kunna gå vidare till nästa steg.
+
+            let button = document.getElementById("knapp");
+            button.parentNode.removeChild(button);
+
+            let rock = document.createElement("button"); // Skapar sten, sax och påse knapparna.
+            let scissors = document.createElement("button"); // Använder dessa för att skappa knapparna för att man ska kunna spela spelet.
+            let paper = document.createElement("button");
+
+            rock.innerHTML = "Sten"; // Lägger till value, typ och funktion till knapparna.
+            rock.setAttribute("type", "button"); // Använder detta för att lätt kunna ange saker till knapparna.
+            rock.setAttribute("onclick", "play(0);")
+
+            scissors.innerHTML = "Sax";
+            scissors.setAttribute("type", "button");
+            scissors.setAttribute("onclick", "play(1);")
+
+            paper.innerHTML = "Påse";
+            paper.setAttribute("type", "button");
+            paper.setAttribute("onclick", "play(2);")
+
+            document.body.appendChild(rock); // Lägger in dem i HTML bodyn. Använder detta för att displaya knapparna så man kan spela.
+            document.body.appendChild(scissors);
+            document.body.appendChild(paper);
+        }
+
+        function ingetnamn() { // Funktion för om man vill köra utan namn knappen.
+            let titel = document.createElement("h2"); // Skapar secondary header titel. För att kunna displaya om du vann, förlorade eller lika.
+            titel.id = "alert"; // Lägger till ett id. Ger ett ID till headern, för att lätt kunna ändra den.
+            document.body.appendChild(titel); // Lägger in dem i HTML bodyn. För att man ska kunna se html headern.
+
+            // En array med default namn (Hela NTI personal teamet i detta fallet) <-- OBS kan ha missat någon.
+            // Använder detta för att det är en rolig grej ifall man inte vill ange ett namn.
+            let namnArray = ["NTI", "David", "Dalila", "Casper", "Adis", "Isac", "Anton", "Daniel", "Christian", "Martin", "Helena", "Viktor", "Lina", "Mats", "Albin", "Gustavo", "Mirza", "Eva", "Johanna", "Neo", "???", "o.O"];
+
+            // Slumpar en siffra och avrundar siffran till 0-21 och det väljer ett
+            // namn i arrayn. T.ex om det blir 0 så blir det "NTI" och nr 1 blir "David" osv.
+            // Använder detta för att skriva ut namnet samt slumpar en siffra för att få ett random namn ur arrayen.
+            document.getElementById("spelare").innerHTML = `<b>Spelare:</b> ${namnArray[Math.round(Math.random() * 21)]}`;
+
+            let namn = document.getElementById("start"); // Letar fram knapparna med id. Använder detta för att lätt kunna ta en html grej för att radera den ur sidan.
+            namn.parentNode.removeChild(namn); // Tar bort dem från HTML sidan. För att man ska gå vidare till nästa ställe på sidan.
+
+            let ingetnamn = document.getElementById("ingetnamn");
+            ingetnamn.parentNode.removeChild(ingetnamn);
+
+            let rock = document.createElement("button"); // Skapar sten, sax, påse knapparna.
+            let scissors = document.createElement("button"); // Använder detta för att skapa knappar för att man ska kunna köra spelet.
+            let paper = document.createElement("button");
+
+            rock.innerHTML = "Sten"; // Lägger till value, typ och onclick funktion till knapparna.
+            rock.setAttribute("type", "button"); // Använder detta för lätt kunna ange saker till knapparna.
+            rock.setAttribute("onclick", "play(0);")
+
+            scissors.innerHTML = "Sax";
+            scissors.setAttribute("type", "button");
+            scissors.setAttribute("onclick", "play(1);")
+
+            paper.innerHTML = "Påse";
+            paper.setAttribute("type", "button");
+            paper.setAttribute("onclick", "play(2);")
+
+            document.body.appendChild(rock); // Lägger in knapparna i HTML bodyn.
+            document.body.appendChild(scissors); // Använder detta för att lägga in knapparna till html bodyn så man kan spela spelet.
+            document.body.appendChild(paper);
+        }
+
+        function play(player) { // Funktion för sten, sax, påse knapparna.
+
+            // For loop för att köra koden en gång.
+            // Hoppas att detta räcker med for loop uppgiften, 
+            // jag vet det gör bara så att det körs en gång haha :)
+            for (let c = 0; c < 1; c++) {
+                let ai = Math.random() * 2; // Slumpar fram ett nummer mellan 0-2. Använder detta för att få datorns val.
+                ai = Math.round(ai); // Avrundar nummret upp eller ner till 0-2. Använder detta för att undvika decimallerna from Math.random
+
+                if (player == ai) { // Kontrollerar ifall det är lika. Använder detta för att lätt kunna konrollera saker.
+                    // Lägger in text till "Alert" id, som är secondary headern.
+                    // Använder detta för att man ska kunna se om man vinner, förlorar eller om det blir lika.
+                    // Kan använda alert också men då måste man klicka ner rutan varje gång, vilket blir lite jobbigt.
+                    document.getElementById("alert").innerHTML = "Det blev lika!";
+                } else if (player == 0) { // Om spelare tar sten och ai sax så vinner du annars förlorar.
+                    if (ai == 1) {
+                        // Lägger in text till "Alert" id, som är secondary headern.
+                        document.getElementById("alert").innerHTML = "Du vann!";
+                    } else {
+                        // Lägger in text till "Alert" id, som är secondary headern.
+                        document.getElementById("alert").innerHTML = "Du förlorade!";
+                    }
+                } else if (player == 1) { // Om spelare tar sax och ai påse så vinner du annars förlorar.
+                    if (ai == 2) {
+                        // Lägger in text till "Alert" id, som är secondary headern.
+                        document.getElementById("alert").innerHTML = "Du vann!";
+                    } else {
+                        // Lägger in text till "Alert" id, som är secondary headern.
+                        document.getElementById("alert").innerHTML = "Du förlorade!";
+                    }
+                } else if (player == 2) { // Om spelare tar påse och ai sten så vinner du annars förlorar.
+                    if (ai == 0) {
+                        // Lägger in text till "Alert" id, som är secondary headern.
+                        document.getElementById("alert").innerHTML = "Du vann!";
+                    } else {
+                        // Lägger in text till "Alert" id, som är secondary headern.
+                        document.getElementById("alert").innerHTML = "Du förlorade!";
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Skapar paragraph med id spelare och style float: right; för att sätta texten åt höger. -->
+    <p id="spelare" style="float: right;"></p>
+    <div class="btnstyle">
+        <!-- Div med class id "btnstyle" -->
+        <!-- Skapar spela med namn samt spela utan namn knaparna och anger ett id och onclick funktioner. -->
+        <input type="button" id="start" value="Spela med namn?" onclick="startanamn();">
+        <input type="button" id="ingetnamn" value="Spela utan namn?" onclick="ingetnamn();">
+    </div>
+    <br> <!-- Breaks -->
+    <br>
+    <style>
+        /* CSS style tags */
+        body {
+            /* Går in i body taggen */
+            background-color: lightblue;
+            /* Ändrar bakrunds färg till ljusblå */
+        }
+
+        .btnstyle {
+            /* Går in i div classen */
+            text-align: center;
+            /* Gör så att diven centreras där diven är om knapparna så de centreras */
+        }
+    </style>
+</head>
+
+</html>
